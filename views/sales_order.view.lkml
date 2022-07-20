@@ -372,6 +372,41 @@ view: sales_order {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: events {
+    type: string
+    case: {
+      when: {
+        sql: ${TABLE}.created_at>= (TIMESTAMP('2021-12-16 00:00:00', 'Etc/GMT-1')) and ${TABLE}.created_at < (TIMESTAMP('2022-01-18 00:00:00', 'Etc/GMT-1')) ;;
+        label: "新年活动"
+      }
+      when: {
+        sql: ${TABLE}.created_at>= (TIMESTAMP('2022-02-01 00:00:00', 'Etc/GMT-1')) and ${TABLE}.created_at < (TIMESTAMP('2022-02-15 00:00:00', 'Etc/GMT-1')) ;;
+        label: "情人节活动"
+      }
+      when: {
+        sql: ${TABLE}.created_at>= (TIMESTAMP('2022-02-10 00:00:00', 'Etc/GMT-1')) and ${TABLE}.created_at < (TIMESTAMP('2022-03-02 00:00:00', 'Etc/GMT-1')) ;;
+        label: "狂欢节活动"
+      }
+      when: {
+        sql: ${TABLE}.created_at>= (TIMESTAMP('2022-03-01 00:00:00', 'Etc/GMT-1')) and ${TABLE}.created_at < (TIMESTAMP('2022-03-09 00:00:00', 'Etc/GMT-1')) ;;
+        label: "妇女节活动"
+      }
+      when: {
+        sql: ${TABLE}.created_at>= (TIMESTAMP('2022-03-10 00:00:00', 'Etc/GMT-1')) and ${TABLE}.created_at < (TIMESTAMP('2022-04-01 00:00:00', 'Etc/GMT-1')) ;;
+        label: "春季新品大促-园艺类"
+      }
+      when: {
+        sql: ${TABLE}.created_at>= (TIMESTAMP('2022-04-06 00:00:00', 'Etc/GMT-1')) and ${TABLE}.created_at < (TIMESTAMP('2022-04-19 00:00:00', 'Etc/GMT-1')) ;;
+        label: "复活节活动"
+      }
+      when: {
+        sql: ${TABLE}.created_at>= (TIMESTAMP('2022-04-22 00:00:00', 'Etc/GMT-1')) and ${TABLE}.created_at < (TIMESTAMP('2022-05-09 00:00:00', 'Etc/GMT-1')) ;;
+        label: "季中大促-户外家具"
+      }
+      else: "None"
+    }
+  }
+
   dimension_group: customer_dob {
     type: time
     timeframes: [
